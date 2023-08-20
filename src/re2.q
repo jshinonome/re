@@ -17,14 +17,14 @@
   .re2.replaceAll[pattern;texts;repl]
  };
 
-.re2.Match:{[pattern;texts]
+.re2.IsMatch:{[pattern;texts]
   .re2.validateArgs[`pattern`texts!(pattern;texts)];
-  .re2.partialMatch[pattern;texts]
+  .re2.isPartialMatch[pattern;texts]
   };
 
-.re2.FullMatch:{[pattern;texts]
+.re2.IsFullMatch:{[pattern;texts]
   .re2.validateArgs[`pattern`texts!(pattern;texts)];
-  .re2.fullMatch[pattern;texts]
+  .re2.isFullMatch[pattern;texts]
  };
 
 .re2.validateArgs:{[args]

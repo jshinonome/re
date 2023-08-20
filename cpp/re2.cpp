@@ -157,12 +157,12 @@ static K matchByMethod(K regexp, K texts, bool (*func)(const StringPiece &, cons
     }
 }
 
-extern "C" K PartialMatch(K regexp, K text)
+extern "C" K IsPartialMatch(K regexp, K text)
 {
     return matchByMethod(regexp, text, RE2::PartialMatch);
 }
 
-extern "C" K FullMatch(K regexp, K text)
+extern "C" K IsFullMatch(K regexp, K text)
 {
     return matchByMethod(regexp, text, RE2::FullMatch);
 }
@@ -316,13 +316,13 @@ extern "C" K libre2(K x)
 {
     K func = ktn(0, 5);
     x = ktn(KS, 5);
-    xS[0] = ss((char *)"partialMatch");
-    xS[1] = ss((char *)"fullMatch");
+    xS[0] = ss((char *)"isPartialMatch");
+    xS[1] = ss((char *)"isFullMatch");
     xS[2] = ss((char *)"replace");
     xS[3] = ss((char *)"replaceAll");
     xS[4] = ss((char *)"matchGroups");
-    kK(func)[0] = dl(reinterpret_cast<V *>(PartialMatch), 2);
-    kK(func)[1] = dl(reinterpret_cast<V *>(FullMatch), 2);
+    kK(func)[0] = dl(reinterpret_cast<V *>(IsPartialMatch), 2);
+    kK(func)[1] = dl(reinterpret_cast<V *>(IsFullMatch), 2);
     kK(func)[2] = dl(reinterpret_cast<V *>(Replace), 3);
     kK(func)[3] = dl(reinterpret_cast<V *>(ReplaceAll), 3);
     kK(func)[4] = dl(reinterpret_cast<V *>(MatchGroups), 2);

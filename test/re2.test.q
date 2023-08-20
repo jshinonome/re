@@ -2,44 +2,44 @@ import{"../src/re2.q"};
 
 // test full match
 .kest.Test["test full match a string";{
-  .re2.FullMatch["\\d{4}";"9999"]
+  .re2.IsFullMatch["\\d{4}";"9999"]
  }];
 
 .kest.Test["test full match strings";{
-  .kest.Match[110b;.re2.FullMatch["\\d{4}";("9999";"1234";"111")]]
+  .kest.Match[110b;.re2.IsFullMatch["\\d{4}";("9999";"1234";"111")]]
  }];
 
 .kest.Test["test full match a symbol";{
-  .re2.FullMatch["\\d{4}";`9999]
+  .re2.IsFullMatch["\\d{4}";`9999]
  }];
 
 .kest.Test["test full match symbols";{
-  .kest.Match[110b;.re2.FullMatch["\\d{4}";(`9999`1234`111)]]
+  .kest.Match[110b;.re2.IsFullMatch["\\d{4}";(`9999`1234`111)]]
  }];
 
 // test match
 .kest.Test["test match a string";{
-  .re2.Match["\\d{4}";"99999"]
+  .re2.IsMatch["\\d{4}";"99999"]
  }];
 
 .kest.Test["test match strings";{
-  .kest.Match[110b;.re2.Match["\\d{4}";("99999";"1234";"111")]]
+  .kest.Match[110b;.re2.IsMatch["\\d{4}";("99999";"1234";"111")]]
  }];
 
 .kest.Test["test match a symbol";{
-  .re2.Match["\\d{4}";`99999]
+  .re2.IsMatch["\\d{4}";`99999]
  }];
 
 .kest.Test["test match symbols";{
-  .kest.Match[110b;.re2.Match["\\d{4}";(`99999`1234`111)]]
+  .kest.Match[110b;.re2.IsMatch["\\d{4}";(`99999`1234`111)]]
  }];
 
 .kest.Test["test match empty list";{
-  (`boolean$())~.re2.Match["\\d{4}";()]
+  (`boolean$())~.re2.IsMatch["\\d{4}";()]
  }];
 
 .kest.Test["test match empty symbol list";{
-  (`boolean$())~.re2.Match["\\d{4}";`$()]
+  (`boolean$())~.re2.IsMatch["\\d{4}";`$()]
  }];
 
 // test replace all
@@ -78,11 +78,11 @@ import{"../src/re2.q"};
 
 // test match error
 .kest.Test["test bad pattern";{
-   .kest.ToThrow[(.re2.Match;"\\d[";"99999");"re2-bad regex - missing ]: ["]
+   .kest.ToThrow[(.re2.IsMatch;"\\d[";"99999");"re2-bad regex - missing ]: ["]
  }];
 
 .kest.Test["test bad texts";{
-   .kest.ToThrow[(.re2.Match;"\\d[";1);"requires string(s) or symbol(s) as texts"]
+   .kest.ToThrow[(.re2.IsMatch;"\\d[";1);"requires string(s) or symbol(s) as texts"]
  }];
 
 .kest.Test["test bad repl";{
