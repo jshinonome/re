@@ -132,6 +132,46 @@ import{"../src/re2.q"};
   ]
  }];
 
+.kest.Test["test match groups of string list with mixed named group";{
+  .kest.Match[
+    `group0`exchange!(("4912";"4921";"8252";"");(1#"T";1#"T";"CHI";""));
+    .re2.MatchGroups[
+      "(\\d{4})(?:\\.(?P<exchange>\\w+))";
+      ("4912.T";"4921.T";"8252.CHI";"")
+    ]
+  ]
+ }];
+
+.kest.Test["test match groups of empty string list with mixed named group";{
+  .kest.Match[
+    `group0`exchange!(();());
+    .re2.MatchGroups[
+      "(\\d{4})(?:\\.(?P<exchange>\\w+))";
+      ()
+    ]
+  ]
+ }];
+
+.kest.Test["test match groups of symbol list with mixed named group";{
+  .kest.Match[
+    `group0`exchange!((`4912`4921`8252`);(`T`T`CHI`));
+    .re2.MatchGroups[
+      "(\\d{4})(?:\\.(?P<exchange>\\w+))";
+      `4912.T`4921.T`8252.CHI`
+    ]
+  ]
+ }];
+
+.kest.Test["test match groups of empty symbol list with mixed named group";{
+  .kest.Match[
+    `group0`exchange!(`$();`$());
+    .re2.MatchGroups[
+      "(\\d{4})(?:\\.(?P<exchange>\\w+))";
+      `$()
+    ]
+  ]
+ }];
+
 .kest.Test["test match groups of a symbol without named groups";{
   .kest.Match[
     `group0`group1`group2!`$("@one-punch-man/";"saitama";"0.0.1");

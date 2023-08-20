@@ -273,7 +273,7 @@ extern "C" K MatchGroups(K regexp, K texts)
 
             for (std::size_t j = 0; j < group_num; ++j)
             {
-                S match = CopyQChars((char *)matches[i].data(), matches[i].length());
+                S match = CopyQChars((char *)matches[j].data(), matches[j].length());
                 kS(kK(captures)[j])[i] = ss(match);
             }
 
@@ -284,6 +284,7 @@ extern "C" K MatchGroups(K regexp, K texts)
     else
     {
         K captures = ktn(0, group_num);
+
         for (std::size_t i = 0; i < group_num; ++i)
         {
             kK(captures)[i] = ktn(0, texts->n);
@@ -303,7 +304,7 @@ extern "C" K MatchGroups(K regexp, K texts)
 
             for (std::size_t j = 0; j < group_num; ++j)
             {
-                kK(kK(captures)[j])[i] = kpn((char *)matches[i].data(), matches[i].length());
+                kK(kK(captures)[j])[i] = kpn((char *)matches[j].data(), matches[j].length());
             }
             free(chars);
         }
