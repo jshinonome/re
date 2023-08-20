@@ -26,13 +26,13 @@ libstdc++-static.x86_64 >= 13.2.1
 ### Installation
 
 ```
-kuki --install re2
+kuki --install re
 ```
 
 ### Examples
 
 ```q
-import{"re2/re2.q"};
+import{"re/re.q"};
 
 // 110b
 .re.IsFullMatch["\\d{4}";(`9999`1234`111)]
