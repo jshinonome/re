@@ -6,6 +6,8 @@ CFLAGS_L := -shared -fPIC -static-libstdc++
 
 build: clean update_re2 build_re2a build_re2
 
+test: build_re2 kest
+
 update_re2:
 	git submodule init
 	git submodule update
@@ -18,5 +20,8 @@ build_re2:
 
 clean:
 	rm src/*.so
+
+kest:
+	kest
 
 .PHONY: clean update_re2 build_re2a build_re2
