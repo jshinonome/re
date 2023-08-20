@@ -1,93 +1,93 @@
-import{"../src/re2.q"};
+import{"../src/re.q"};
 
 // test full match
 .kest.Test["test full match a string";{
-  .re2.IsFullMatch["\\d{4}";"9999"]
+  .re.IsFullMatch["\\d{4}";"9999"]
  }];
 
 .kest.Test["test full match strings";{
-  .kest.Match[110b;.re2.IsFullMatch["\\d{4}";("9999";"1234";"111")]]
+  .kest.Match[110b;.re.IsFullMatch["\\d{4}";("9999";"1234";"111")]]
  }];
 
 .kest.Test["test full match a symbol";{
-  .re2.IsFullMatch["\\d{4}";`9999]
+  .re.IsFullMatch["\\d{4}";`9999]
  }];
 
 .kest.Test["test full match symbols";{
-  .kest.Match[110b;.re2.IsFullMatch["\\d{4}";(`9999`1234`111)]]
+  .kest.Match[110b;.re.IsFullMatch["\\d{4}";(`9999`1234`111)]]
  }];
 
 // test match
 .kest.Test["test match a string";{
-  .re2.IsMatch["\\d{4}";"99999"]
+  .re.IsMatch["\\d{4}";"99999"]
  }];
 
 .kest.Test["test match strings";{
-  .kest.Match[110b;.re2.IsMatch["\\d{4}";("99999";"1234";"111")]]
+  .kest.Match[110b;.re.IsMatch["\\d{4}";("99999";"1234";"111")]]
  }];
 
 .kest.Test["test match a symbol";{
-  .re2.IsMatch["\\d{4}";`99999]
+  .re.IsMatch["\\d{4}";`99999]
  }];
 
 .kest.Test["test match symbols";{
-  .kest.Match[110b;.re2.IsMatch["\\d{4}";(`99999`1234`111)]]
+  .kest.Match[110b;.re.IsMatch["\\d{4}";(`99999`1234`111)]]
  }];
 
 .kest.Test["test match empty list";{
-  (`boolean$())~.re2.IsMatch["\\d{4}";()]
+  (`boolean$())~.re.IsMatch["\\d{4}";()]
  }];
 
 .kest.Test["test match empty symbol list";{
-  (`boolean$())~.re2.IsMatch["\\d{4}";`$()]
+  (`boolean$())~.re.IsMatch["\\d{4}";`$()]
  }];
 
 // test replace all
 .kest.Test["test replace all of a string";{
-  .kest.Match["99";.re2.ReplaceAll["\\d{2}";"9999";1#"9"]]
+  .kest.Match["99";.re.ReplaceAll["\\d{2}";"9999";1#"9"]]
  }];
 
 .kest.Test["test replace all of strings";{
-  .kest.Match[("999";"99";"91");.re2.ReplaceAll["\\d{2}";("99999";"1234";"111");1#"9"]]
+  .kest.Match[("999";"99";"91");.re.ReplaceAll["\\d{2}";("99999";"1234";"111");1#"9"]]
  }];
 
 .kest.Test["test replace all of a symbol";{
-  .kest.Match[`99;.re2.ReplaceAll["\\d{2}";`9999;1#"9"]]
+  .kest.Match[`99;.re.ReplaceAll["\\d{2}";`9999;1#"9"]]
  }];
 
 .kest.Test["test replace all of symbols";{
-  .kest.Match[(`999`99`91);.re2.ReplaceAll["\\d{2}";(`99999`1234`111);1#"9"]]
+  .kest.Match[(`999`99`91);.re.ReplaceAll["\\d{2}";(`99999`1234`111);1#"9"]]
  }];
 
 // test replace
 .kest.Test["test replace first match of a string";{
-  .kest.Match["999";.re2.Replace["\\d{2}";"9999";1#"9"]]
+  .kest.Match["999";.re.Replace["\\d{2}";"9999";1#"9"]]
  }];
 
 .kest.Test["test replace first match of strings";{
-  .kest.Match[("9999";"934";"91");.re2.Replace["\\d{2}";("99999";"1234";"111");1#"9"]]
+  .kest.Match[("9999";"934";"91");.re.Replace["\\d{2}";("99999";"1234";"111");1#"9"]]
  }];
 
 .kest.Test["test replace first match of a symbol";{
-  .kest.Match[`999;.re2.Replace["\\d{2}";`9999;1#"9"]]
+  .kest.Match[`999;.re.Replace["\\d{2}";`9999;1#"9"]]
  }];
 
 .kest.Test["test replace first match of symbols";{
-  .kest.Match[`9999`934`91;.re2.Replace["\\d{2}";`99999`1234`111;1#"9"]]
+  .kest.Match[`9999`934`91;.re.Replace["\\d{2}";`99999`1234`111;1#"9"]]
  }];
 
 // test match error
 .kest.Test["test bad pattern";{
-   .kest.ToThrow[(.re2.IsMatch;"\\d[";"99999");"re2-bad regex - missing ]: ["]
+   .kest.ToThrow[(.re.IsMatch;"\\d[";"99999");"re2-bad regex - missing ]: ["]
  }];
 
 .kest.Test["test bad texts";{
-   .kest.ToThrow[(.re2.IsMatch;"\\d[";1);"requires string(s) or symbol(s) as texts"]
+   .kest.ToThrow[(.re.IsMatch;"\\d[";1);"requires string(s) or symbol(s) as texts"]
  }];
 
 .kest.Test["test bad repl";{
   .kest.ToThrow[
-    (.re2.Replace;"\\d{2}";`99999`1234`111;`9);
+    (.re.Replace;"\\d{2}";`99999`1234`111;`9);
     "requires string type as repl"]
  }];
 
@@ -95,7 +95,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of a string without named groups";{
   .kest.Match[
     `group0`group1`group2!("@one-punch-man/";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(@[a-z-]+/)?([a-z-]+)(?:@([0-9]+\\.[0-9]+\\.[0-9]+))?";
       "@one-punch-man/saitama@0.0.1"
     ]
@@ -105,7 +105,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of a string with named group";{
   .kest.Match[
     `scope`package`version!("@one-punch-man/";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(?P<scope>@[a-z-]+/)?(?P<package>[a-z-]+)(?:@(?P<version>[0-9]+\\.[0-9]+\\.[0-9]+))?";
       "@one-punch-man/saitama@0.0.1"
     ]
@@ -115,7 +115,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of a string with mixed named group";{
   .kest.Match[
     `scope`package`group2!("@one-punch-man/";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(?P<scope>@[a-z-]+/)?(?P<package>[a-z-]+)(?:@([0-9]+\\.[0-9]+\\.[0-9]+))?";
       "@one-punch-man/saitama@0.0.1"
     ]
@@ -125,7 +125,7 @@ import{"../src/re2.q"};
 .kest.Test["test partial match groups of a string with mixed named group";{
   .kest.Match[
     `scope`package`group2!("";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(?P<scope>@[a-z-]+/)?(?P<package>[a-z-]+)(?:@([0-9]+\\.[0-9]+\\.[0-9]+))?";
       "saitama@0.0.1"
     ]
@@ -135,7 +135,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of string list with mixed named group";{
   .kest.Match[
     `group0`exchange!(("4912";"4921";"8252";"");(1#"T";1#"T";"CHI";""));
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(\\d{4})(?:\\.(?P<exchange>\\w+))";
       ("4912.T";"4921.T";"8252.CHI";"")
     ]
@@ -145,7 +145,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of empty string list with mixed named group";{
   .kest.Match[
     `group0`exchange!(();());
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(\\d{4})(?:\\.(?P<exchange>\\w+))";
       ()
     ]
@@ -155,7 +155,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of symbol list with mixed named group";{
   .kest.Match[
     `group0`exchange!((`4912`4921`8252`);(`T`T`CHI`));
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(\\d{4})(?:\\.(?P<exchange>\\w+))";
       `4912.T`4921.T`8252.CHI`
     ]
@@ -165,7 +165,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of empty symbol list with mixed named group";{
   .kest.Match[
     `group0`exchange!(`$();`$());
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(\\d{4})(?:\\.(?P<exchange>\\w+))";
       `$()
     ]
@@ -175,7 +175,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of a symbol without named groups";{
   .kest.Match[
     `group0`group1`group2!`$("@one-punch-man/";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(@[a-z-]+/)?([a-z-]+)(?:@([0-9]+\\.[0-9]+\\.[0-9]+))?";
       `$"@one-punch-man/saitama@0.0.1"
     ]
@@ -185,7 +185,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of a symbol with named group";{
   .kest.Match[
     `scope`package`version!`$("@one-punch-man/";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(?P<scope>@[a-z-]+/)?(?P<package>[a-z-]+)(?:@(?P<version>[0-9]+\\.[0-9]+\\.[0-9]+))?";
       `$"@one-punch-man/saitama@0.0.1"
     ]
@@ -195,7 +195,7 @@ import{"../src/re2.q"};
 .kest.Test["test match groups of a symbol with mixed named group";{
   .kest.Match[
     `scope`package`group2!`$("@one-punch-man/";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(?P<scope>@[a-z-]+/)?(?P<package>[a-z-]+)(?:@([0-9]+\\.[0-9]+\\.[0-9]+))?";
       `$"@one-punch-man/saitama@0.0.1"
     ]
@@ -205,7 +205,7 @@ import{"../src/re2.q"};
 .kest.Test["test partial match groups of a symbol with mixed named group";{
   .kest.Match[
     `scope`package`group2!`$("";"saitama";"0.0.1");
-    .re2.MatchGroups[
+    .re.MatchGroups[
       "(?P<scope>@[a-z-]+/)?(?P<package>[a-z-]+)(?:@([0-9]+\\.[0-9]+\\.[0-9]+))?";
       `$"saitama@0.0.1"
     ]
@@ -216,7 +216,7 @@ import{"../src/re2.q"};
 .kest.Test["test no match group error";{
   .kest.ToThrow[
     (
-      .re2.MatchGroups;
+      .re.MatchGroups;
       "[a-z-]+";
       "saitama"
     );
@@ -227,7 +227,7 @@ import{"../src/re2.q"};
 .kest.Test["test too many groups error";{
   .kest.ToThrow[
     (
-      .re2.MatchGroups;
+      .re.MatchGroups;
       "(0)(1)(2)(3)(4)(5)(6)(7)(8)(9)(10)";
       "saitama"
     );

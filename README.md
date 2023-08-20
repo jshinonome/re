@@ -1,12 +1,12 @@
 ## Re2
 
-A wrapper of [google/re2,tag:2023-03-01](https://github.com/google/re2) for kdb+/q
+A kdb+/q wrapper of [google/re2,tag:2023-03-01](https://github.com/google/re2)
 
-- .re2.IsMatch
-- .re2.IsFullMatch
-- .re2.Replace
-- .re2.ReplaceAll
-- .re2.MatchGroups
+- .re.IsMatch
+- .re.IsFullMatch
+- .re.Replace
+- .re.ReplaceAll
+- .re.MatchGroups
 
 Reference:
 
@@ -35,17 +35,17 @@ kuki --install re2
 import{"re2/re2.q"};
 
 // 110b
-.re2.IsFullMatch["\\d{4}";(`9999`1234`111)]
+.re.IsFullMatch["\\d{4}";(`9999`1234`111)]
 
 // 110b
-.re2.IsMatch["\\d{4}";`99999`1234`111]
+.re.IsMatch["\\d{4}";`99999`1234`111]
 
 // "999"
-.re2.Replace["\\d{2}";"9999";1#"9"]
+.re.Replace["\\d{2}";"9999";1#"9"]
 
 // `999`99`91
-.re2.ReplaceAll["\\d{2}";`99999`1234`111;1#"9"]
+.re.ReplaceAll["\\d{2}";`99999`1234`111;1#"9"]
 
 // `group0`exchange!((`4912`4921`8252`);(`T`T`CHI`))
-.re2.MatchGroups["(\\d{4})(?:\\.(?P<exchange>\\w+))";`4912.T`4921.T`8252.CHI`]
+.re.MatchGroups["(\\d{4})(?:\\.(?P<exchange>\\w+))";`4912.T`4921.T`8252.CHI`]
 ```
