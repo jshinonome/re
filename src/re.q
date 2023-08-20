@@ -1,5 +1,4 @@
 .re.path:` sv(first ` vs hsym `$first -3#value{}),`re2;
-// load partialMatchN, partialMatch, fullMatch
 .re:(.re.path 2:(`libre2;1))`;
 
 .re.MatchGroups:{[pattern;texts]
