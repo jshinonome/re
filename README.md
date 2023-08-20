@@ -1,4 +1,4 @@
-## Re2
+## Re
 
 A kdb+/q wrapper of [google/re2,tag:2023-03-01](https://github.com/google/re2)
 
