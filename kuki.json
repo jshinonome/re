@@ -1,6 +1,6 @@
 {
   "name": "re",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "q language binding of google/re2 regex library",
   "author": "Jo Shinonome",
   "repository": {

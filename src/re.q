@@ -1,5 +1,6 @@
 .re.path:` sv(first ` vs hsym `$first -3#value{}),`re2;
 .re:(.re.path 2:(`libre2;1))`;
+.re:((enlist `)!enlist (::)),.re;
 
 .re.MatchGroups:{[pattern;texts]
   .re.validateArgs[`pattern`texts!(pattern;texts)];
